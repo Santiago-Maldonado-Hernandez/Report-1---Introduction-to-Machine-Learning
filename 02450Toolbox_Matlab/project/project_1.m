@@ -31,7 +31,17 @@ end
 % Create a table with the stadistics summary
 Stats = table(m', q, v', s', r', 'VariableNames', stats_names, 'RowNames', S');
 
-% study the covariance, and correlation
+% study the covariance and correlation between atributes
+cov_matrix = cell(8, 8);
+for i = 1:8
+    for j=1:8
+        % Calculate the covariance matrix of every attribute 
+        covariance = cov(X(1:end, i), X(1:end, j));
+        cov_matrix{i, j} = covariance;
+        % Calculate the correlation of every attribute
+        correlation(i, j) = corr(X(1:end, i), X(1:end, j));
+    end
+end
 
 % What to do with the nominal?
 mode(categorical(table2cell(abalone_table(:,1))))
