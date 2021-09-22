@@ -15,12 +15,18 @@ X = table2array(abalone_table(:, 2:9));
 % summary statistics for numerical attributes
 S = {'Length','Diameter','Height','Whole weight','Shucked weight','Viscera weight','Shell weight','Rings'};
 % summary stadistics
-% the median will be studied by the percentiles/quantile. The mean is the
+% the median will be studied by the percentiles/quantile. The median is the
 % quantile .5p. 
 stats_names = {'Mean' 'Quantiles' 'Variance' 'Standar deviation' 'range'};
 
+% iniziate vectors
+m = zeros(1, 8);
+q = zeros(8, 5);
+v = zeros(1, 8);
+s = zeros(1, 8);
+r = zeros(1, 8);
+
 for i = 1:8
-    S(i);
     m(1, i) = mean(X(1:end,i));
     q(i, :) = quantile(X(1:end,i),[0 0.25 0.5 0.75 1]);
     v(1, i) = var(X(1:end,i));
@@ -33,6 +39,7 @@ Stats = table(m', q, v', s', r', 'VariableNames', stats_names, 'RowNames', S');
 
 % study the covariance and correlation between atributes
 cov_matrix = cell(8, 8);
+correlation = zeros(8, 8);
 for i = 1:8
     for j=1:8
         % Calculate the covariance matrix of every attribute 
