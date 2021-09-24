@@ -167,8 +167,7 @@ for k = 0:1
         axis equal
         title(sprintf( [titles{k+1}, '\n', 'Projection'] ) )
         % Add a legend to one of the plots (but not both):
-        if k; %h = legend(classNames, 'Location', 'best', 'color', 'none'); 
-        end;
+        if k; h = legend(classNames, 'Location', 'best', 'color', 'none'); end;
 
     % Plot attribute coefficients in principal component space
     subplot(nrows, ncols,  3+k);
@@ -178,7 +177,7 @@ for k = 0:1
                 'AutoScale','off', ...
                'LineWidth', .1)
         hold on
-        for pc=1:length(attributeNames)-1
+        for pc=1:length(attributeNames)
             text(V(pc,i), V(pc,j),attributeNames{pc}, ...
                  'FontSize', 10)
         end
